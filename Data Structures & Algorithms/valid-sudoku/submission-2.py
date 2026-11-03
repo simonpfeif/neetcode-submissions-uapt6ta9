@@ -1,0 +1,24 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        rows = [set() for _ in range(9)]
+        cols = [set() for _ in range(9)]
+        diags = [set() for _ in range(9)]
+        for r in range(9):
+            for c in range(9):
+                cur = board[r][c]
+                if cur == '.':
+                    continue
+                diag_pos = ((r // 3) * 3) + (c // 3)
+                if cur in cols[c]:
+                    return False
+                elif cur in rows[r]:
+                    return False
+                elif cur in diags[diag_pos]:
+                    return False
+
+                cols[c].add(cur)
+                rows[r].add(cur)
+                diags[diag_pos].add(cur)
+        
+                
+        return True
